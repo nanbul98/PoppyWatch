@@ -1,0 +1,27 @@
+{
+  "name": "lumohacks",
+  "version": "0.1.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@fitbit/sdk": "~1.0.2",
+    "@fitbit/sdk-cli": "^1.0.1"
+  },
+  "fitbit": {
+    "appUUID": "9ee85220-396f-40da-a87c-45e5791b1611",
+    "appType": "app",
+    "appDisplayName": "Lumohacks",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "#ffffff",
+    "requestedPermissions": [],
+    "buildTargets": [
+      "higgs",
+      "meson"
+    ],
+    "i18n": {}
+  },
+  "scripts": {
+    "build": "fitbit-build",
+    "debug": "fitbit"
+  }
+}
