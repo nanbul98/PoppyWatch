@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import ReactTable from "react-table";
 import 'react-table/react-table.css';
 import styles from '../../dist/styles.css';
+import FormFillOut from './FormFillOut';
+import { CSSTransitionGroup } from 'react-transition-group'
+
 
 class DataTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showPopup: false,
       unfilledRows: [0,0],
       data: [{
         time: null,
@@ -19,10 +23,21 @@ class DataTable extends Component {
         othernotes: null,
       }]
     }
+    this.updateField = this.updateField.bind(this)
+    this.togglePopup = this.togglePopup.bind(this)
   }
 
+  togglePopup() {
+  this.setState({
+    showPopup: !this.state.showPopup
+  });
+
+}
+
   updateField (row, key, value) {
-    data[row][key] = value;
+    this.state.data[row][key] = value;
+    this.render();
+
   }
 
   render() {
@@ -51,13 +66,18 @@ class DataTable extends Component {
       Header: 'Other Notes',
       accessor: 'othernotes'
     }]
-    console.log('allo!!');
+    let popup = this.state.showPopup && <FormFillOut updateField={this.updateField} togglePopup={this.togglePopup}/>
+    console.log(popup)
     if (this.state.unfilledRows.length) {
-      console.log('allo');
-      return (<div>
-        <button class="button"><span>Missing fields!</span></button>
+      return (<div class="table-container">
+        <button class="button unfilled" onClick= {this.togglePopup.bind(this)}><span>Missing fields!</span>
+        </button>
+        <CSSTransitionGroup
+        transitionName="popup">
+          {popup}
+        </CSSTransitionGroup>
         <ReactTable
-          data={data}
+          data={this.state.data}
           columns={columns}
           defaultPageSize = {5}
           pageSizeOptions = {[3, 6]}
