@@ -4,7 +4,12 @@ hrm.start();
 let status = {
   data: {
     time: Date.now(), //Unix time
-    heartRate: hrm.heartRate
+    heartRate: hrm.heartRate,
+    situation: '',
+    thoughts: '',
+    emotions: '',
+    physicalScenario: '',
+    othernotes: ''
   }
 }
 function updateData() {
