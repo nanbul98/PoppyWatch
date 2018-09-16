@@ -47,27 +47,27 @@ class FormFillOut extends React.Component {
           <h1>Reflect on the day.</h1>
         <form onSubmit={this.handleSubmit}>
         <label>
-        Situation:
+        <span class="form-text">Situation:</span>
         <input type="text" name="situation" value={this.state.situation} onChange ={this.handleChange}/>
         </label>
         <label>
-        Thoughts:
+        <span class="form-text">Thoughts:</span>
         <input type="text" name="thoughts" value={this.state.thoughts} onChange ={this.handleChange}/>
         </label>
         <label>
-        Emotions:
+        <span class="form-text">Emotions:</span>
         <input type="text" name="emotions" value={this.state.emotions} onChange ={this.handleChange}/>
         </label>
         <label>
-        Physical Scenario:
+        <span class="form-text">Physical Scenario:</span>
         <input type="text" name="physicalscenario" value={this.state.physicalscenario}
         onChange ={this.handleChange}/>
         </label>
         <label>
-        Other Notes:
+        <span class="form-text">Other Notes:</span>
         <input type="text" name="othernotes" value={this.state.othernotes} onChange ={this.handleChange}/>
         </label>
-        <input type="submit" value="Submit" />
+        <input class="submitter" type="submit" value="Submit" />
         </form>
         </div>
       </div>

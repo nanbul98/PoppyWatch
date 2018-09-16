@@ -83,7 +83,7 @@ class DataTable extends Component {
     console.log(popup)
     if (this.state.unfilledRows.length) {
       return (<div class="table-container">
-        <button class="button unfilled" onClick= {this.togglePopup.bind(this)}><span>Missing fields!</span>
+        <button class="button unfilled" onClick= {this.togglePopup.bind(this)}><span>Record Your Experience</span>
         </button>
         <CSSTransitionGroup
         transitionName="popup">

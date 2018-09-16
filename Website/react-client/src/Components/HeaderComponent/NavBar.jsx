@@ -5,6 +5,12 @@ class NavBar extends Component {
   render() {
     return (
       <header>
+        <div class="title">
+          PoppyWatch
+          <div class="Legion">
+            // <img src="../../../../dist/legion-logo.png" />
+          </div>
+        </div>
         <ul id="headerButtons">
           <li className="navButton"><Link to="">Home</Link></li>
         </ul>

@@ -5,7 +5,9 @@ import DataTable from './DataTable';
 class HomePage extends Component {
   render() {
     return (
-      <div>
+      <div class= "home">
+        <div class="sidebar">
+        </div>
         <DataTable />
       </div>
     )
