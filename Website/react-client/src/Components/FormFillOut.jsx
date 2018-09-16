@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import DataTable from './DataTable';
 
 class FormFillOut extends React.Component {
   constructor(props) {
@@ -18,17 +19,26 @@ class FormFillOut extends React.Component {
 
   handleChange(event) {
     let change = { [event.target.name]: event.target.value };
-    console.log(change);
     this.setState(change);
   }
 
   handleSubmit(event) {
-    event.preventDefault();
+      event.preventDefault();
+    let index = 0;
+    for(let i = 0; i < this.props.data.length; i++) {
+      console.log(this.props.data[i]);
+      if(Object.values(this.props.data[i]).filter(x => !x).length) {
+        index = i;
+        break;
+      }
+    }
     for (var property in this.state) {
-      this.props.updateField(0,property,this.state[property]);
+      this.props.updateField(index, property,this.state[property]);
     }
     this.props.togglePopup();
+
   }
+
 
   render() {
     return (

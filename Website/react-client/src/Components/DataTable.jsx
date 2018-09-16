@@ -13,15 +13,23 @@ class DataTable extends Component {
       showPopup: false,
       unfilledRows: [0,0],
       data: [{
-        time: null,
-        location: null,
-        heartrate: null,
-        situation:null ,
-        thoughts: null,
-        emotions: null,
-        physicalscenario: null,
-        othernotes: null,
-      }]
+        time: 32222,
+        location: "a place",
+        heartrate: 123,
+        situation: '' ,
+        thoughts: '',
+        emotions: '',
+        physicalscenario: '',
+        othernotes: ''
+      }, {
+      time: 321122,
+      location: "another place",
+      heartrate: 12,
+      situation: '' ,
+      thoughts: '',
+      emotions: '',
+      physicalscenario: '',
+      othernotes: ''}]
     }
     this.updateField = this.updateField.bind(this)
     this.togglePopup = this.togglePopup.bind(this)
@@ -66,7 +74,12 @@ class DataTable extends Component {
       Header: 'Other Notes',
       accessor: 'othernotes'
     }]
-    let popup = this.state.showPopup && <FormFillOut updateField={this.updateField} togglePopup={this.togglePopup}/>
+    let popup = this.state.showPopup &&
+    <FormFillOut
+      updateField={this.updateField}
+      togglePopup={this.togglePopup}
+      data={this.state.data}
+    />
     console.log(popup)
     if (this.state.unfilledRows.length) {
       return (<div class="table-container">
@@ -80,7 +93,7 @@ class DataTable extends Component {
           data={this.state.data}
           columns={columns}
           defaultPageSize = {5}
-          pageSizeOptions = {[3, 6]}
+          pageSizeOptions = {[5, 10]}
         />
             </div>
       );
@@ -89,8 +102,8 @@ class DataTable extends Component {
         <ReactTable
           data={this.state.data}
           columns={columns}
-          defaultPageSize = {1}
-          pageSizeOptions = {[3, 6]}
+          defaultPageSize = {5}
+          pageSizeOptions = {[5, 10]}
           />
       </div>
     );
