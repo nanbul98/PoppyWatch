@@ -16,7 +16,8 @@ class DataTable extends Component {
     this.state = {
       showPopup: false,
       unfilledRows: [0,0],
-      data: []
+      data: [],
+      identifiers: []
     }
     this.updateField = this.updateField.bind(this);
     this.togglePopup = this.togglePopup.bind(this);
@@ -32,41 +33,36 @@ togglePopup() {
 
   updateField (row, key, value) {
     this.state.data[row][key] = value;
-    firebaseRef.child(this.state.userKey).child('events')
+    firebaseRef.child(this.state.userKey).child('events').child(this.state.identifiers[row]).update({
+      [key]: value
+    });
     this.render();
   }
 
   componentDidMount() {
     firebaseRef.on('value', snapshot => {
       this.setState({data: Object.values(snapshot.val())[0].events, userKey: Object.keys(snapshot.val())[0]});
+      this.setState({identifiers: Object.keys(this.state.data)});
 
-      firebaseRef.child(this.state.userKey).child('events').child('-LMXacBtOjTlhW6XQSbN').update({ 
-        heartRate: 654, 
-        location: "40 40", 
-        time: 25353563, 
-        situation: "stuff happened",
-        thoughts: "test",
-        emotions: "emotional",
-        physicalScenario: "physics?",
-        othernotes: "test"
-      }), (error) => {
-       if (error) {
-         console.log(error.message);
-       } 
-      };
+      if (Object.keys(this.state.data).length) {
+        Object.values(this.state.data).forEach(element => {
+           element.time = moment(element.time).format("DD/MM/YYYY LT");
+        });
+      }
+
+      this.setState({data: Object.values(this.state.data)});
+      this.render();
     });
   }
 
   isEmpty() {
     let empty = false;
       for (var property of Object.values(this.state.data)) {
-        console.log(property);
         let values = Object.values(property);
         for (var i = 0; i < values.length; i++) {
           if (!values[i]) {
             empty = true;
           }
-          console.log(values[i]);
         }
       }
       return empty
@@ -101,12 +97,6 @@ togglePopup() {
       accessor: 'othernotes'
     }]
 
-    if (Object.keys(this.state.data).length) {
-      Object.values(this.state.data).forEach(element => {
-         element.time = moment(element.time).format("DD/MM/YYYY LT")
-      } );
-    }
-
     let popup = this.state.showPopup &&
     <FormFillOut
       updateField={this.updateField}
@@ -114,7 +104,6 @@ togglePopup() {
       data={this.state.data}
     />
 
-    console.log(popup)
     if (this.isEmpty()) {
       return (<div class="table-container">
         <button class="button unfilled" onClick= {this.togglePopup.bind(this)}><span>Record Your Experience</span>
@@ -132,6 +121,7 @@ togglePopup() {
         </div>
       );
     }
+    
     return (<div>
         <ReactTable
           data={Object.values(this.state.data)}
