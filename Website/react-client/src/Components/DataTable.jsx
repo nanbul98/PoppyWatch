@@ -15,30 +15,8 @@ class DataTable extends Component {
     super(props);
     this.state = {
       showPopup: false,
-<<<<<<< HEAD
-      data: [{
-        time: 32222,
-        location: 'a place',
-        heartrate: 123,
-        situation: '' ,
-        thoughts: 'asd',
-        emotions: 'sad',
-        physicalscenario: 'dfs',
-        othernotes: 'sdf'
-      }, {
-      time: 321122,
-      location: 'another place',
-      heartrate: 12,
-      situation: '' ,
-      thoughts: '',
-      emotions: '',
-      physicalscenario: '',
-      othernotes: ''}],
-      users: []
-=======
       unfilledRows: [0,0],
       data: []
->>>>>>> Database connections added after merge conflicts
     }
     this.updateField = this.updateField.bind(this);
     this.togglePopup = this.togglePopup.bind(this);
@@ -54,6 +32,7 @@ togglePopup() {
 
   updateField (row, key, value) {
     this.state.data[row][key] = value;
+    firebaseRef.child(this.state.userKey).child('events')
     this.render();
   }
 
@@ -69,7 +48,7 @@ togglePopup() {
         thoughts: "test",
         emotions: "emotional",
         physicalScenario: "physics?",
-        othernotes: "notes"
+        othernotes: "test"
       }), (error) => {
        if (error) {
          console.log(error.message);
@@ -80,7 +59,7 @@ togglePopup() {
 
   isEmpty() {
     let empty = false;
-      for (var property of this.state.data) {
+      for (var property of Object.values(this.state.data)) {
         console.log(property);
         let values = Object.values(property);
         for (var i = 0; i < values.length; i++) {
@@ -134,14 +113,9 @@ togglePopup() {
       togglePopup={this.togglePopup}
       data={this.state.data}
     />
-<<<<<<< HEAD
+
     console.log(popup)
     if (this.isEmpty()) {
-=======
-
-    if (this.state.unfilledRows.length) {
-      console.log(Object.values(this.state.data));
->>>>>>> Database connections added after merge conflicts
       return (<div class="table-container">
         <button class="button unfilled" onClick= {this.togglePopup.bind(this)}><span>Record Your Experience</span>
         </button>
