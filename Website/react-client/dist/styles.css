@@ -12,7 +12,7 @@ header {
   position: fixed;
   min-width: 90%;
   left: 5%;
-  top: 10%;
+  top: 30%;
   z-index: -1;
 }
 
@@ -21,6 +21,7 @@ header {
   height: 500%;
   width: 50px;
   position: absolute;
+  top: -100%;
   left: -70px;
   z-index: -1;
 }
@@ -40,6 +41,18 @@ header {
   color: #fefefe;
   z-index: 1;
 }
+.legion {
+  width:120px;
+  height: 40px;
+  background-color: white;
+  z-index: 1;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.legion img {
+  display: none;
+}
+
 
 #headerButtons {
   list-style-type: none;

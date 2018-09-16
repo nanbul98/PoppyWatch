@@ -1,10 +1,12 @@
 import * as messaging from "messaging";
 import { localStorage } from "local-storage";
+import { geolocation } from "geolocation"
 
 import { me } from "companion";
 // const uuidv1 = require('uuid/v1');
 const PROJECT_ID = "poppywatch-72416";
 let data = {};
+let location;
 
 function getUser() {
   return localStorage.getItem("userId");
@@ -41,9 +43,19 @@ function updateDatabase (user, data) {
       console.log("Got JSON response from server(POST): " + text); });
 }
 
+function locationSuccess(position) {
+    location = position.coords.latitude, ", " + position.coords.longitude;
+}
+
+function locationError(error) {
+  location = "We were unable to determine your location."
+}
+
 // Listen for the onmessage event
 messaging.peerSocket.onmessage = function(evt) {
   // Output the message to the console
+  geolocation.getCurrentPosition(locationSuccess, locationError);
+  evt.data[location] = location;
   let user = getUser();
   user ? updateDatabase(user, evt.data) : setUserAndUpdateDatabase(evt.data);
 }

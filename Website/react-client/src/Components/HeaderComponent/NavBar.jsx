@@ -8,7 +8,7 @@ class NavBar extends Component {
         <div class="title">
           PoppyWatch
           <div class="Legion">
-            // <img src="../../../../dist/legion-logo.png" />
+             <img src="legion-logo.png" />
           </div>
         </div>
         <ul id="headerButtons">

@@ -16,7 +16,12 @@ function updateData() {
   console.log("got here");
   status.data = {
     time: Date.now(), //Unix time
-    heartRate: hrm.heartRate
+    heartRate: hrm.heartRate,
+    situation: '',
+    thoughts: '',
+    emotions: '',
+    physicalScenario: '',
+    othernotes: ''
   };
 }
 export {status, updateData};
