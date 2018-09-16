@@ -1,1 +1,13 @@
+#Fitbit ignores
 FitBit/build/
+
+
+# Website ignores
+# Logs
+Website/logs
+Website/*.Logs
+# Compiled directory and file
+Website/build/
+Website/react-client/dist/bundle.js
+# Dependency directories
+Website/node_modules/

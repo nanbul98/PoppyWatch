@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import DataTable from './DataTable';
 
 class HomePage extends Component {
   render() {
     return (
       <div>
-        Test
+        <DataTable />
+        Hello
       </div>
     )
   }
@@ -13,7 +15,7 @@ class HomePage extends Component {
 
 /*function tick() {
   const element = (
-    <div> 
+    <div>
       <h2>Hi!</h2>
       <h2>The time is: {new Date().toUTCString()}.</h2>
     </div>
