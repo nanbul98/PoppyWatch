@@ -1,3 +1,5 @@
 <svg>
   <rect id="background" />
+  <text id="hrm-label" x="10%"> Heart Rate </text>
+  <text id="hrm-data" x="60%"> {...} </text>
 </svg>
