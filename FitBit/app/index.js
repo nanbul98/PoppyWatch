@@ -1,25 +1,18 @@
 import document from 'document'
 import refreshHeartData from "../common/heartrate"
 import { HeartRateSensor } from 'heart-rate';
-let hrm = new HeartRateSensor();
-hrm.start();
+import {status, updateData} from "../common/trigger"
+import * as messaging from "messaging";
 refreshHeartData();
-let status = {
-  data: {
-    time: Date.now(), //Unix time
-    heartRate: hrm.heartRate
-  }
-}
-function updateData() {
-  console.log("got here");
-  status.data = {
-    time: Date.now(), //Unix time
-    heartRate: hrm.heartRate
-  };
-}
+
 document.onkeypress = function (e) {
   if(e.key === "down") {
-    console.log(status.data);
+    updateData();
+    //console.log(JSON.stringify(status.data));
+    if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
+      // Send the data to peer as a message
+      messaging.peerSocket.send(status.data);
+    }
   }
 }
 
