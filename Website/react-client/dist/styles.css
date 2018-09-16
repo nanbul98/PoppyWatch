@@ -12,6 +12,107 @@ header {
   padding: 0;
 }
 
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f44336;
+  border: none;
+  color: #FFFFFF;
+  opacity: 0.75;
+  text-align: center;
+  font-size: 14px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+.table-container {
+  text-align: center;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 0.5;
+  right: 0;
+}
+
+
+.popup-enter {
+  opacity: 0.01;
+}
+
+.popup-enter.popup-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.popup-leave {
+  opacity: 1;
+}
+
+.popup-leave.popup-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(0,0,0, 0.5);
+  z-index: 10;
+}
+.popup_inner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 35%;
+  right: 35%;
+  top: 25%;
+  bottom: 25%;
+  margin: auto;
+  padding-left: 10px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0px 5px 8px 7px #666666;
+}
+
+.popup_inner form {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 15px;
+}
+.popup_inner form label {
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+}
+
 .navButton {
   float: right;
 }

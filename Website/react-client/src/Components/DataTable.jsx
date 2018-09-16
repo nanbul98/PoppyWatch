@@ -1,38 +1,54 @@
 import React, { Component } from 'react';
 import ReactTable from "react-table";
 import 'react-table/react-table.css';
+import styles from '../../dist/styles.css';
+import FormFillOut from './FormFillOut';
+import { CSSTransitionGroup } from 'react-transition-group'
+
 
 class DataTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      unfilledRows: [9,11]
+      showPopup: false,
+      unfilledRows: [0,0],
+      data: [{
+        time: 32222,
+        location: "a place",
+        heartrate: 123,
+        situation: '' ,
+        thoughts: '',
+        emotions: '',
+        physicalscenario: '',
+        othernotes: ''
+      }, {
+      time: 321122,
+      location: "another place",
+      heartrate: 12,
+      situation: '' ,
+      thoughts: '',
+      emotions: '',
+      physicalscenario: '',
+      othernotes: ''}]
     }
+    this.updateField = this.updateField.bind(this)
+    this.togglePopup = this.togglePopup.bind(this)
+  }
+
+  togglePopup() {
+  this.setState({
+    showPopup: !this.state.showPopup
+  });
+
+}
+
+  updateField (row, key, value) {
+    this.state.data[row][key] = value;
+    this.render();
+
   }
 
   render() {
-    document.getElementById('root')
-    const data = [{
-      time: 'Roy Agasthyan',
-      location: 26,
-      heartrate: 72
-    },{
-      name: 'Sam Thomason',
-      age: 22
-    },{
-      name: 'Michael Jackson',
-      age: 36
-    },{
-      name: 'Samuel Roy',
-      age: 56
-    },{
-      name: 'Rima Soy',
-      age: 28
-    },{
-      name: 'Suzi Eliamma',
-      age: 28
-    }]
-
     const columns = [{
       Header: 'Time',
       accessor: 'time'
@@ -56,28 +72,38 @@ class DataTable extends Component {
       accessor: 'physicalscenario'
     }, {
       Header: 'Other Notes',
-      accessor: 'other notes'
+      accessor: 'othernotes'
     }]
-    console.log('allo!!');
+    let popup = this.state.showPopup &&
+    <FormFillOut
+      updateField={this.updateField}
+      togglePopup={this.togglePopup}
+      data={this.state.data}
+    />
+    console.log(popup)
     if (this.state.unfilledRows.length) {
-      console.log('allo');
-      return (<div>
-        <button>Things</button>
+      return (<div class="table-container">
+        <button class="button unfilled" onClick= {this.togglePopup.bind(this)}><span>Missing fields!</span>
+        </button>
+        <CSSTransitionGroup
+        transitionName="popup">
+          {popup}
+        </CSSTransitionGroup>
         <ReactTable
-          data={data}
+          data={this.state.data}
           columns={columns}
-          defaultPageSize = {6}
-          pageSizeOptions = {[3, 6]}
+          defaultPageSize = {5}
+          pageSizeOptions = {[5, 10]}
         />
             </div>
       );
     }
     return (<div>
         <ReactTable
-          data={data}
+          data={this.state.data}
           columns={columns}
-          defaultPageSize = {6}
-          pageSizeOptions = {[3, 6]}
+          defaultPageSize = {5}
+          pageSizeOptions = {[5, 10]}
           />
       </div>
     );
