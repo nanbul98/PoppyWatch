@@ -15,7 +15,7 @@ class DataTable extends Component {
         time: 32222,
         location: 'a place',
         heartrate: 123,
-        situation: 'asda' ,
+        situation: '' ,
         thoughts: 'asd',
         emotions: 'sad',
         physicalscenario: 'dfs',

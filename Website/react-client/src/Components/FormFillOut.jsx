@@ -4,14 +4,13 @@ import DataTable from './DataTable';
 
 class FormFillOut extends React.Component {
   constructor(props) {
-    console.log("Constructed");
     super(props);
     this.state = {
-      situation: '',
-      thoughts: '',
-      emotions: '',
-      physicalscenario: '',
-      othernotes: ''
+      situation: this.props.situation,
+      thoughts: this.props.thoughts,
+      emotions: this.props.emotions,
+      physicalscenario: this.props.physicalscenario,
+      othernotes: this.props.othernotes
       };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,14 +25,15 @@ class FormFillOut extends React.Component {
       event.preventDefault();
     let index = 0;
     for(let i = 0; i < this.props.data.length; i++) {
-      console.log(this.props.data[i]);
       if(Object.values(this.props.data[i]).filter(x => !x).length) {
         index = i;
         break;
       }
     }
     for (var property in this.state) {
-      this.props.updateField(index, property,this.state[property]);
+      if (this.state[property]) {
+            this.props.updateField(index, property,this.state[property]);  
+      }
     }
     this.props.togglePopup();
 
