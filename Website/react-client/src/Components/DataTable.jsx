@@ -11,28 +11,28 @@ class DataTable extends Component {
     super(props);
     this.state = {
       showPopup: false,
-      unfilledRows: [0,0],
       data: [{
         time: 32222,
-        location: "a place",
+        location: 'a place',
         heartrate: 123,
-        situation: '' ,
-        thoughts: '',
-        emotions: '',
-        physicalscenario: '',
-        othernotes: ''
+        situation: 'asda' ,
+        thoughts: 'asd',
+        emotions: 'sad',
+        physicalscenario: 'dfs',
+        othernotes: 'sdf'
       }, {
       time: 321122,
-      location: "another place",
+      location: 'another place',
       heartrate: 12,
-      situation: '' ,
-      thoughts: '',
-      emotions: '',
-      physicalscenario: '',
-      othernotes: ''}]
+      situation: 'ht' ,
+      thoughts: 'ew',
+      emotions: 'erw',
+      physicalscenario: 'er',
+      othernotes: 'e'}]
     }
-    this.updateField = this.updateField.bind(this)
-    this.togglePopup = this.togglePopup.bind(this)
+    this.updateField = this.updateField.bind(this);
+    this.togglePopup = this.togglePopup.bind(this);
+    this.isEmpty = this.isEmpty.bind(this);
   }
 
   togglePopup() {
@@ -46,6 +46,21 @@ class DataTable extends Component {
     this.state.data[row][key] = value;
     this.render();
 
+  }
+
+  isEmpty() {
+    let empty = false;
+      for (var property of this.state.data) {
+        console.log(property);
+        let values = Object.values(property);
+        for (var i = 0; i < values.length; i++) {
+          if (!values[i]) {
+            empty = true;
+          }
+          console.log(values[i]);
+        }
+      }
+      return empty
   }
 
   render() {
@@ -81,7 +96,7 @@ class DataTable extends Component {
       data={this.state.data}
     />
     console.log(popup)
-    if (this.state.unfilledRows.length) {
+    if (this.isEmpty()) {
       return (<div class="table-container">
         <button class="button unfilled" onClick= {this.togglePopup.bind(this)}><span>Missing fields!</span>
         </button>
