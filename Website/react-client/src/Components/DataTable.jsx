@@ -4,7 +4,11 @@ import 'react-table/react-table.css';
 import styles from '../../dist/styles.css';
 import FormFillOut from './FormFillOut';
 import { CSSTransitionGroup } from 'react-transition-group'
+import fire from '.././fire';
+import moment from 'moment';
 
+
+var firebaseRef = fire.database().ref("users")
 
 class DataTable extends Component {
   constructor(props) {
@@ -24,18 +28,19 @@ class DataTable extends Component {
       time: 321122,
       location: 'another place',
       heartrate: 12,
-      situation: 'ht' ,
-      thoughts: 'ew',
-      emotions: 'erw',
-      physicalscenario: 'er',
-      othernotes: 'e'}]
+      situation: '' ,
+      thoughts: '',
+      emotions: '',
+      physicalscenario: '',
+      othernotes: ''}],
+      users: []
     }
     this.updateField = this.updateField.bind(this);
     this.togglePopup = this.togglePopup.bind(this);
     this.isEmpty = this.isEmpty.bind(this);
   }
 
-  togglePopup() {
+togglePopup() {
   this.setState({
     showPopup: !this.state.showPopup
   });
@@ -45,7 +50,27 @@ class DataTable extends Component {
   updateField (row, key, value) {
     this.state.data[row][key] = value;
     this.render();
+  }
 
+  componentDidMount() {
+    firebaseRef.on('value', snapshot => {
+      this.setState({users: Object.values(snapshot.val())[0], userKey: Object.keys(snapshot.val())[0]});
+      firebaseRef.child(this.state.userKey).child('events').child('-LMXacBtOjTlhW6XQSbN').update({ 
+        heartRate: 654, 
+        location: "40 40", 
+        time: "5:00AM", 
+        situation: "stuff happened",
+        thoughts: "test",
+        emotions: "emotional",
+        physicalScenario: "physics?",
+        otherNotes: "notes"
+      }), (error) => {
+       if (error) {
+         console.log(error.message);
+       } 
+      };
+    });
+    
   }
 
   isEmpty() {
@@ -64,6 +89,8 @@ class DataTable extends Component {
   }
 
   render() {
+    document.getElementById('root')
+
     const columns = [{
       Header: 'Time',
       accessor: 'time'
@@ -72,7 +99,7 @@ class DataTable extends Component {
       accessor: 'location'
     }, {
       Header: 'Heart Rate',
-      accessor: 'heartrate'
+      accessor: 'heartRate'
     }, {
       Header: 'Situation',
       accessor: 'situation'
@@ -84,7 +111,7 @@ class DataTable extends Component {
       accessor: 'emotions'
     }, {
       Header: 'Physical Scenario',
-      accessor: 'physicalscenario'
+      accessor: 'physicalScenario'
     }, {
       Header: 'Other Notes',
       accessor: 'othernotes'
@@ -110,7 +137,7 @@ class DataTable extends Component {
           defaultPageSize = {5}
           pageSizeOptions = {[5, 10]}
         />
-            </div>
+        </div>
       );
     }
     return (<div>
