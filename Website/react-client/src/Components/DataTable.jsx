@@ -15,6 +15,7 @@ class DataTable extends Component {
     super(props);
     this.state = {
       showPopup: false,
+<<<<<<< HEAD
       data: [{
         time: 32222,
         location: 'a place',
@@ -34,6 +35,10 @@ class DataTable extends Component {
       physicalscenario: '',
       othernotes: ''}],
       users: []
+=======
+      unfilledRows: [0,0],
+      data: []
+>>>>>>> Database connections added after merge conflicts
     }
     this.updateField = this.updateField.bind(this);
     this.togglePopup = this.togglePopup.bind(this);
@@ -54,23 +59,23 @@ togglePopup() {
 
   componentDidMount() {
     firebaseRef.on('value', snapshot => {
-      this.setState({users: Object.values(snapshot.val())[0], userKey: Object.keys(snapshot.val())[0]});
+      this.setState({data: Object.values(snapshot.val())[0].events, userKey: Object.keys(snapshot.val())[0]});
+
       firebaseRef.child(this.state.userKey).child('events').child('-LMXacBtOjTlhW6XQSbN').update({ 
         heartRate: 654, 
         location: "40 40", 
-        time: "5:00AM", 
+        time: 25353563, 
         situation: "stuff happened",
         thoughts: "test",
         emotions: "emotional",
         physicalScenario: "physics?",
-        otherNotes: "notes"
+        othernotes: "notes"
       }), (error) => {
        if (error) {
          console.log(error.message);
        } 
       };
     });
-    
   }
 
   isEmpty() {
@@ -116,14 +121,27 @@ togglePopup() {
       Header: 'Other Notes',
       accessor: 'othernotes'
     }]
+
+    if (Object.keys(this.state.data).length) {
+      Object.values(this.state.data).forEach(element => {
+         element.time = moment(element.time).format("DD/MM/YYYY LT")
+      } );
+    }
+
     let popup = this.state.showPopup &&
     <FormFillOut
       updateField={this.updateField}
       togglePopup={this.togglePopup}
       data={this.state.data}
     />
+<<<<<<< HEAD
     console.log(popup)
     if (this.isEmpty()) {
+=======
+
+    if (this.state.unfilledRows.length) {
+      console.log(Object.values(this.state.data));
+>>>>>>> Database connections added after merge conflicts
       return (<div class="table-container">
         <button class="button unfilled" onClick= {this.togglePopup.bind(this)}><span>Record Your Experience</span>
         </button>
@@ -132,7 +150,7 @@ togglePopup() {
           {popup}
         </CSSTransitionGroup>
         <ReactTable
-          data={this.state.data}
+          data={Object.values(this.state.data)}
           columns={columns}
           defaultPageSize = {5}
           pageSizeOptions = {[5, 10]}
@@ -142,7 +160,7 @@ togglePopup() {
     }
     return (<div>
         <ReactTable
-          data={this.state.data}
+          data={Object.values(this.state.data)}
           columns={columns}
           defaultPageSize = {5}
           pageSizeOptions = {[5, 10]}
