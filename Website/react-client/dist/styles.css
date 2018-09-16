@@ -12,7 +12,7 @@ header {
   position: fixed;
   min-width: 90%;
   left: 5%;
-  top: 30%;
+  top: 15%;
   z-index: -1;
 }
 
@@ -22,7 +22,7 @@ header {
   width: 50px;
   position: absolute;
   top: -100%;
-  left: -70px;
+  left: -72px;
   z-index: -1;
 }
 
@@ -30,6 +30,7 @@ header {
   margin-left: 0px;
   margin-top: 0px;
   float: left;
+  font-family: Marker-Felt;
   font-size: 18px;
   font-weight: 500;
   padding-left: 10px;
@@ -41,16 +42,18 @@ header {
   color: #fefefe;
   z-index: 1;
 }
-.legion {
-  width:120px;
+.Legion {
+  width:100px;
   height: 40px;
   background-color: white;
   z-index: 1;
   border-radius: 10px;
   overflow: hidden;
+  position: absolute;
+  right: 17.5%;
+  top: 3%;
 }
 .legion img {
-  display: none;
 }
 
 
@@ -161,7 +164,7 @@ header {
   padding-bottom: 15px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
 }
 .form-text {
   min-width: 25%;
@@ -206,4 +209,5 @@ body {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
   font-size: 14px;
+  background-color: #FEFCFC;
 }
