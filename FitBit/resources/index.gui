@@ -1,9 +1,13 @@
 <svg class="background">
-  <symbol id="animatedHRImage">
-    <image id="hrIcon" x="50%-50" y="50%-24" width="48" height="48" href="stat_hr_solid_48px.png" load="sync" fill="#CCCCCC"/>
-    <animate attributeName="opacity" begin="enable" end="disable" final="restore" from="1" to="0" dur="1" />
-  </symbol>
-  
-  <use id="hrImage" href="#animatedHRImage" />
-  <text id="hrText" fill="#ffffff" font-size="35" font-family="Colfax-Regular" text-anchor="start" text-length="32" x="50%+2" y="50%+12">--</text>
-</svg>
+<symbol id="animatedHRImage">
+<image id="hrIcon" x="50%-50" y="50%-24" width="48" height="48" href="stat_hr_solid_48px.png" load="sync" fill="red"/>
+<animate attributeName="opacity" begin="0s" repeatCount="indefinite" final="restore" from="1" to="0" dur="1" />
+</symbol>
+
+<use id="hrImage" href="#animatedHRImage" />
+<text id="hrm-data" fill="#ffffff" font-size="35" font-family="Colfax-Regular" text-anchor="start" text-length="32" x="50%+2" y="50%+12">--</text>
+
+<use id="mybutton" href="#push-button" y="180" height="60" fill="fb-red" font-family="System-Regular" font-size="30">
+<set href="#text" attributeName="text-buffer" to="Button" />
+<set href="#text" attributeName="y" to="12" />
+</use>
