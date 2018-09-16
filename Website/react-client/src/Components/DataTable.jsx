@@ -1,38 +1,31 @@
 import React, { Component } from 'react';
 import ReactTable from "react-table";
 import 'react-table/react-table.css';
+import styles from '../../dist/styles.css';
 
 class DataTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      unfilledRows: [9,11]
+      unfilledRows: [0,0],
+      data: [{
+        time: null,
+        location: null,
+        heartrate: null,
+        situation:null ,
+        thoughts: null,
+        emotions: null,
+        physicalscenario: null,
+        othernotes: null,
+      }]
     }
   }
 
-  render() {
-    document.getElementById('root')
-    const data = [{
-      time: 'Roy Agasthyan',
-      location: 26,
-      heartrate: 72
-    },{
-      name: 'Sam Thomason',
-      age: 22
-    },{
-      name: 'Michael Jackson',
-      age: 36
-    },{
-      name: 'Samuel Roy',
-      age: 56
-    },{
-      name: 'Rima Soy',
-      age: 28
-    },{
-      name: 'Suzi Eliamma',
-      age: 28
-    }]
+  updateField (row, key, value) {
+    data[row][key] = value;
+  }
 
+  render() {
     const columns = [{
       Header: 'Time',
       accessor: 'time'
@@ -56,17 +49,17 @@ class DataTable extends Component {
       accessor: 'physicalscenario'
     }, {
       Header: 'Other Notes',
-      accessor: 'other notes'
+      accessor: 'othernotes'
     }]
     console.log('allo!!');
     if (this.state.unfilledRows.length) {
       console.log('allo');
       return (<div>
-        <button>Things</button>
+        <button class="button"><span>Missing fields!</span></button>
         <ReactTable
           data={data}
           columns={columns}
-          defaultPageSize = {6}
+          defaultPageSize = {5}
           pageSizeOptions = {[3, 6]}
         />
             </div>
@@ -74,9 +67,9 @@ class DataTable extends Component {
     }
     return (<div>
         <ReactTable
-          data={data}
+          data={this.state.data}
           columns={columns}
-          defaultPageSize = {6}
+          defaultPageSize = {1}
           pageSizeOptions = {[3, 6]}
           />
       </div>
