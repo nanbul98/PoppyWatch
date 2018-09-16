@@ -44,7 +44,7 @@ function updateDatabase (user, data) {
 }
 
 function locationSuccess(position) {
-    location = position.coords.latitude, ", " + position.coords.longitude;
+    location = position.coords.latitude.toFixed(2) + ", " + position.coords.longitude.toFixed(2);
 }
 
 function locationError(error) {
@@ -55,7 +55,7 @@ function locationError(error) {
 messaging.peerSocket.onmessage = function(evt) {
   // Output the message to the console
   geolocation.getCurrentPosition(locationSuccess, locationError);
-  evt.data[location] = location;
+  evt.data["location"] = location;
   let user = getUser();
   user ? updateDatabase(user, evt.data) : setUserAndUpdateDatabase(evt.data);
 }

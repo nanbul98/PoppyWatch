@@ -9,7 +9,7 @@ class FormFillOut extends React.Component {
       situation: this.props.situation,
       thoughts: this.props.thoughts,
       emotions: this.props.emotions,
-      physicalscenario: this.props.physicalscenario,
+      physicalScenario: this.props.physicalScenario,
       othernotes: this.props.othernotes
       };
     this.handleChange = this.handleChange.bind(this);
@@ -60,7 +60,7 @@ class FormFillOut extends React.Component {
         </label>
         <label>
         <span class="form-text">Physical Scenario:</span>
-        <input type="text" name="physicalscenario" value={this.state.physicalscenario}
+        <input type="text" name="physicalScenario" value={this.state.physicalScenario}
         onChange ={this.handleChange}/>
         </label>
         <label>
