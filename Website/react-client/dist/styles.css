@@ -5,14 +5,17 @@ header {
   height: 50px;
   color: white;
 }
+
 #headerButtons {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
+
 .navButton {
   float: right;
 }
+
 footer {
   display: block;
   width: 100%;
